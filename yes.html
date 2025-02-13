@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yay! ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffccdd;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff3366;
+      font-size: 2.5rem;
+      animation: pop 1s ease-in-out;
+    }
+
+    p {
+      color: #d63384;
+      font-size: 1.2rem;
+      max-width: 90%;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff3366;
+      clip-path: polygon(50% 0%, 61% 18%, 82% 18%, 100% 36%, 100% 57%, 50% 100%, 0% 57%, 0% 36%, 18% 18%, 39% 18%);
+      animation: floatUp 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    .hidden-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      margin-top: 20px;
+      max-width: 90%;
+    }
+
+    .hidden-content img {
+      width: 90%;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh) rotate(0deg); }
+      to { transform: translateY(-10vh) rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .heart {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Yay! ❤️</h1>
+  <p>I'm so happy you said YES! 🎉 You are the best! 💖</p>
+  <div class="hearts" id="heartsContainer"></div>
+  
+  <div class="hidden-content" id="hiddenContent">
+    <img src="./WhatsApp Image 2025-02-13 at 17.13.48_88c5c23a.jpg" alt="Cute Image">
+    <p id="typing-text"></p>
+  </div>
+
+  <script>
+    function createHearts() {
+      const container = document.getElementById('heartsContainer');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        heart.style.opacity = Math.random();
+        container.appendChild(heart);
+      }
+    }
+
+    function showHiddenContent() {
+      const content = document.getElementById('hiddenContent');
+      content.style.display = 'block';
+      setTimeout(() => {
+        content.style.opacity = '1';
+        typeText("I love you so much, honey! I couldn't get you the best gift possible, but I hope this makes up for it!");
+      }, 100);
+    }
+
+    function typeText(text) {
+      let i = 0;
+      const typingText = document.getElementById('typing-text');
+      typingText.innerHTML = '';
+      function typing() {
+        if (i < text.length) {
+          typingText.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, 50);
+        }
+      }
+      typing();
+    }
+
+    setTimeout(showHiddenContent, 3000); // Show content after 3 seconds
+    createHearts();
+  </script>
+</body>
+</html>
